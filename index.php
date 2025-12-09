@@ -132,12 +132,19 @@ body{margin:0;font-family:San Francisco, -apple-system, BlinkMacSystemFont, 'Seg
     </div>
 </footer>
 
+<!-- PYTHON RUNTIME BLOCK INSERTED HERE -->
+<?php
+$python_out = shell_exec("python3 /var/www/html/runtime_info.py 2>&1");
+?>
+<div style="padding:20px;margin:40px;background:#f5f5f7;border-radius:12px;color:#333;font-family:monospace;">
+    <strong>Server Runtime Info (Python)</strong><br><br>
+    <pre><?= htmlspecialchars($python_out) ?></pre>
+</div>
+
 <script>
 function openProduct(sku){
     fetch('?product='+encodeURIComponent(sku)).then(r=>r.json()).then(j=>{
-        alert(j.name + " — " + j.price + "
-
-" + (j.tag||''));
+        alert(j.name + " — " + j.price + "\n\n" + (j.tag||''));
     }).catch(()=>alert('Product not found'));
 }
 </script>
